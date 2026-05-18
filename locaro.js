@@ -80,6 +80,7 @@ console.info(`Locaro v${Locaro.version} initialized`);
         const image = item.dataset.image || "";
         const url = item.dataset.url || "";
         const key = item.dataset.key || url || title || `${lat}-${lng}-${index}`;
+        const matterport = item.dataset.matterport || "";
 
         return {
           type: "Feature",
@@ -93,7 +94,8 @@ console.info(`Locaro v${Locaro.version} initialized`);
             category,
             address,
             image,
-            url
+            url,
+            matterport
           }
         };
       })
@@ -278,9 +280,55 @@ console.info(`Locaro v${Locaro.version} initialized`);
       });
     }
 
+    function openMatterportModal(url) {
+  closeMatterportModal();
+
+  const modal = document.createElement("div");
+  modal.className = "matterport-modal";
+  modal.innerHTML = `
+    <div class="matterport-modal-backdrop" data-matterport-close></div>
+    <div class="matterport-modal-content">
+      <button type="button" class="matterport-modal-close" data-matterport-close>×</button>
+      <iframe
+        src="${url}"
+        allowfullscreen
+        allow="xr-spatial-tracking; fullscreen"
+        loading="lazy"
+      ></iframe>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target.closest("[data-matterport-close]")) {
+      closeMatterportModal();
+    }
+  });
+
+  document.addEventListener("keydown", handleMatterportEscape);
+}
+
+function closeMatterportModal() {
+  const modal = document.querySelector(".matterport-modal");
+  if (!modal) return;
+
+  const iframe = modal.querySelector("iframe");
+  if (iframe) iframe.src = ""; // unload Matterport
+
+  modal.remove();
+  document.removeEventListener("keydown", handleMatterportEscape);
+}
+
+function handleMatterportEscape(e) {
+  if (e.key === "Escape") {
+    closeMatterportModal();
+  }
+}
+
     function openLocationPopup(feature) {
       const coords = feature.geometry.coordinates.slice();
-      const { key, title, address, category, image, url } = feature.properties;
+      const { key, title, address, category, image, url, matterport } = feature.properties;
 
       if (activePopup) {
         activePopup.remove();
@@ -300,9 +348,19 @@ console.info(`Locaro v${Locaro.version} initialized`);
             ${category ? `<div class="map-popup-category">${category}</div>` : ""}
             ${address ? `<div class="map-popup-address">${address}</div>` : ""}
             ${url ? `<a class="map-popup-link" href="${url}">View more</a>` : ""}
+            ${matterport ? `<button type="button" class="map-popup-3d-button" data-matterport-url="${matterport}">See in 3D</button>` : ""}
           </div>
         `)
         .addTo(map);
+
+        const popupElement = popup.getElement();
+
+popupElement
+  .querySelector(".map-popup-3d-button")
+  ?.addEventListener("click", (e) => {
+    e.preventDefault();
+    openMatterportModal(e.currentTarget.dataset.matterportUrl);
+  });
 
       activePopup = popup;
 
