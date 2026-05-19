@@ -239,13 +239,14 @@ body {
 
 .matterport-modal-close {
   position: absolute;
-  top: -42px;
-  right: 0;
-  font-size: 32px;
+  top: 8px;
+  right: 8px;
+  font-size: 48px;
   background: none;
   color: white;
   border: 0;
   cursor: pointer;
+  padding:0;
 }
 
 .map-popup-3d-button {
