@@ -348,7 +348,7 @@ function handleMatterportEscape(e) {
             ${category ? `<div class="map-popup-category">${category}</div>` : ""}
             ${address ? `<div class="map-popup-address">${address}</div>` : ""}
             ${url ? `<a class="map-popup-link" href="${url}">View more</a>` : ""}
-            ${matterport ? `<button type="button" class="map-popup-3d-button">See in 3D</button>` : ""}
+            ${matterport ? `<button type="button" class="map-popup-3d-button">Se digital tvilling</button>` : ""}
           </div>
         `)
         .addTo(map);
