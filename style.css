@@ -201,6 +201,9 @@ body {
   color: #1d7b81;
   text-decoration: none;
   font-weight: 600;
+  display: block;
+  background-color:transparent;
+  padding:0;
 }
 
 .map-popup-link:hover, .map-popup-3d-button:hover {
