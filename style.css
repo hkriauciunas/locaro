@@ -197,13 +197,13 @@ body {
   line-height: 1.4;
 }
 
-.map-popup-link {
+.map-popup-link, .map-popup-3d-button {
   color: #1d7b81;
   text-decoration: none;
   font-weight: 600;
 }
 
-.map-popup-link:hover {
+.map-popup-link:hover, .map-popup-3d-button:hover {
   text-decoration: underline;
 }
 
@@ -246,7 +246,6 @@ body {
 }
 
 .map-popup-3d-button {
-  display: inline-block;
   margin-top: 8px;
   cursor: pointer;
 }
