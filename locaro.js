@@ -509,7 +509,7 @@ popupElement
 
           map.easeTo({
             center: clusterFeatures[0].geometry.coordinates,
-            zoom
+            zoom: Math.min(zoom + 3, 18)
           });
         });
       });
