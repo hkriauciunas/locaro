@@ -1,5 +1,5 @@
 window.Locaro = {
-  version:"0.1.0",
+  version:"1.0.4",
   init(config = {}) {
 
 
@@ -222,7 +222,7 @@ console.info(`Locaro v${Locaro.version} initialized`);
               <div class="map-result-content">
                 <div class="map-result-title">${title}</div>
                 <div class="map-result-category">${category || ""}</div>
-                <div class="map-result-address">${address || ""}</div>
+                ${address ? `<div class="map-result-address">${address}</div>` : ""}
               </div>
             </button>
           `;
