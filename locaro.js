@@ -1,5 +1,5 @@
 window.Locaro = {
-  version:"1.0.4",
+  version:"1.0.6",
   init(config = {}) {
 
 
@@ -509,7 +509,7 @@ popupElement
 
           map.easeTo({
             center: clusterFeatures[0].geometry.coordinates,
-            zoom: Math.min(zoom + 3, 18)
+            zoom: Math.min(zoom + 2, 18)
           });
         });
       });
