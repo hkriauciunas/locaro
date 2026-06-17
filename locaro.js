@@ -1,5 +1,5 @@
 window.Locaro = {
-  version:"1.0.6",
+  version:"1.0.7",
   init(config = {}) {
 
 
@@ -531,10 +531,15 @@ popupElement
       });
 
       renderFilterButtons();
-      renderSidebar();
-      bindSearchEvents();
-      bindSidebarEvents();
-      fitMapToFeatures(features, 12);
+renderSidebar();
+bindSearchEvents();
+bindSidebarEvents();
+
+// Start focused on Norway
+map.jumpTo({
+  center: [10.75, 63.5],
+  zoom: 4.5
+});
     });
   }
 };
